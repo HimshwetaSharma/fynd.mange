@@ -3,43 +3,50 @@
     
       
       <div class ="container my-3">
-        <h2>Add a ToDo</h2>
-        <form action ="/" method="POST">
+        <h2><strong>Manage Employees</strong></h2>
+        <form action ="/key" method="POST">
             <div class="row mb-3">
-              <label for="title" class="col-sm-2 col-form-label">To Do Title</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="title" id="title">
+              <label for="title" class="col-sm-2 col-form-label"><b>Name</b></label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="title" id="title" required>
               </div>
             </div>
             <div class="row mb-3">
-              <label for="desc" class="col-sm-2 col-form-label">To Do Description</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" name="desc" id="desc">
+              <label for="desc" class="col-sm-2 col-form-label"><b>Email</b></label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" name="desc" id="desc" required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="phone" class="col-sm-2 col-form-label"><b>Phone</b></label>
+              <div class="col-sm-10">
+                <input type="Integer" class="form-control" name="phone" id="phone"required>
               </div>
             </div>
            
-            <button type="submit" class="btn btn-outline-success">submit</button>
-           
+            <button type="submit" class="btn btn-outline-success"><b>Add New Employee</b></button>
+
+            
           </form>
     </div>
     <div class = "container my-4">
-        <h2>Your ToDos</h2>
-        
+        <h2><b>Employee List</b></h2>
+         
           {% if allTodo|length==0 %}
             
           <div class="alert alert-primary" role="alert">
-              No Todos found, alert—check it out!
+              No Employee found, alert—check it out!
            </div>
             
             {% else %}
-            <table class="table">
+            <table class="table table-hover table-dark">
               <thead>
                 <tr>
                   <th scope="col">SNo</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Update</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Edit</th>
                   <th scope="col">Delete</th>
                 </tr>
                 
@@ -52,20 +59,107 @@
                 <th scope="row">{{loop.index}}</th>
                 <td>{{todo.title}}</td>
                 <td>{{todo.desc}}</td>
-                <td>{{todo.date_created}}</td>
-                <td><a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-success btn-sm-1 mx-0">Update</button></td>
-                <td><a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-success btn-sm-1 mx-0">Delete</button></td>
+                <td>{{todo.phone}}</td>
+                
+                <td><a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-success btn-sm-1 mx-0"><b>EDIT</b></a></button></td>
+                <td><a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-success btn-sm-1 mx-0"><b>Delete</b></button></td>
+                  
                 </tr>
               </div>
-            
+              
             {% endfor %}
              
             {% endif %}
            
           </tbody>
         </table>  
-            
+        
+         
     </div>
+    <!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+
+		/* header styling */
+		h1 {
+			color: green;
+		}
+
+		/* pagination position styling */
+		.pagination_section {
+			position: relative;
+		}
+
+		/* pagination styling */
+		.pagination_section a {
+			color: black;
+			padding: 10px 18px;
+			text-decoration: none;
+		}
+
+		/* pagination hover effect on non-active */
+		.pagination_section a:hover:not(.active) {
+			
+      padding: 5px 20px;
+      background-color: #236B8E;
+      color: #FFFFFF;
+      font-style: oblique;
+      font-weight: bold;
+      border-radius: 10px;
+		}
+
+		/* pagination hover effect on active*/
+
+		
+
+		a:nth-child(1) {
+			font-weight: bold;
+		}
+
+		a:nth-child(7) {
+			font-weight: bold;
+		}
+
+		.content {
+			margin: 50px;
+			padding: 15px;
+			width: 700px;
+			height: 200px;
+			border: 2px solid black;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+	
+		<!-- pagination elements -->
+		<div class="pagination_section">
+			<a href="#"><< Previous</a>
+			<a href="#">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#" >5</a>
+			<a href="#">Next >></a>
+		</div>
+
+	</center>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

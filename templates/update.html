@@ -3,22 +3,31 @@
     
       
     <div class ="container my-3">
-        <h2>Update Your ToDo</h2>
+        <h2><b>Edit Details</b></h2>
         <form action ="/update/{{todo.sno}}" method="POST">
+
             <div class="row mb-3">
-              <label for="title" class="col-sm-2 col-form-label">To Do Title</label>
+              <label for="title" class="col-sm-2 col-form-label"><b>Name</b></label>
               <div class="col-sm-6">
                 <input type="text" class="form-control" name="title" id="title" value="{{todo.title}}">
               </div>
             </div>
+
             <div class="row mb-3">
-              <label for="desc" class="col-sm-2 col-form-label">To Do Description</label>
+              <label for="desc" class="col-sm-2 col-form-label"><b>Email</b></label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" value="{{todo.desc}}" name="desc" id="desc">
+                <input type="email" class="form-control" value="{{todo.desc}}" name="desc" id="desc">
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="phone" class="col-sm-2 col-form-label"><b>Phone</b></label>
+              <div class="col-sm-6">
+                <input type="Integer" class="form-control" value="{{todo.phone}}" name="phone" id="phone">
               </div>
             </div>
            
-            <button type="submit" class="btn btn-outline-success">update</button>
+            <button type="submit" class="btn btn-outline-success"><b>Edit Detail</b></button>
             
         </form>
     </div>
