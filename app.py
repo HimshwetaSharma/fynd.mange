@@ -1,28 +1,5 @@
-"""
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
-class User(UserMixin,db.Model):
-    id = db.Column(db.Integer,primary_key = True,autoincrement=True)
-    username = db.Column(db.String(200))
-    email = db.Column(db.String(200))
-    password = db.Column(db.String(200))
-
-@login_manager.user_loader
-def get(id):
-    return User.Query.get(id)
-
-@app.route('//',methods=['GET'])
-@login_required
-def get_home():
-    return render_template('home')
-"""
 from flask import Flask ,render_template,request,redirect,url_for, flash, session, logging
 from flask_sqlalchemy import SQLAlchemy
-# from flask_login import LoginManager ,UserMixin, login_required
-# import forms import models
-
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'
@@ -32,7 +9,7 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
-    """ Create user table"""
+    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(80))
@@ -97,26 +74,6 @@ def logout():
     session['logged_in'] = False
     return redirect(url_for('home'))
 
-"""
-
-ROWS_PER_PAGE = 5
-@app.route('/key',methods=['GET' ,'POST'])
-def hello_world():
-    page = request.args.get('page', 1, type=int)
-    if request.method=='POST':
-        title = (request.form["title"])
-        desc = (request.form["desc"])
-        phone = (request.form["phone"])
-        
-
-        todo =Todo(title=title, desc=desc ,phone=phone )
-        db.session.add(todo)
-        db.session.commit()
-    allTodo=Todo.query.paginate(page=page,per_page=ROWS_PER_PAGE)
-  
-    
-    return render_template('index.html',allTodo=allTodo)
- """ 
 class Todo(db.Model):
     sno = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(200), nullable = False)
@@ -126,30 +83,40 @@ class Todo(db.Model):
     def __repr__(self) -> str:
         return f"{self.sno} - {self.title}"
 
-
+def login_required(func):
+    def inner():
+        return render_template('error.html')
+        func()
+    return inner
 
 @app.route('/key',methods=['GET' ,'POST'])
 def hello_world():
+    
     if request.method=='POST':
         title = (request.form["title"])
         desc = (request.form["desc"])
         phone = (request.form["phone"])
         
 
-        todo =Todo(title=title, desc=desc ,phone=phone )
+        todo =Todo(title=title, desc=desc ,phone=phone)
         db.session.add(todo)
         db.session.commit()
     allTodo=Todo.query.all()
-    
+ #   page=request.args.get('page',1,type=int)
+ #   pagination=Todo.query.order_by(Todo.Sno).paginate(page,per_page=5)
     
     return render_template('index.html',allTodo=allTodo)
 
 
 @app.route('/show')
+@login_required
 def show():
     allTodo=Todo.query.all()
     print(allTodo)
-    return "KVS IFFCO Aonla"
+    return "all employees"
+
+
+
 
 @app.route('/update/<int:sno>',methods=['GET' ,'POST'])
 def update(sno):
@@ -177,7 +144,11 @@ def delete(sno):
     db.session.delete(todo)
     db.session.commit()
     return redirect("/key")
-    
+
+@app.route('/main')
+def main():
+    return render_template('main.html')
+
 if __name__=="__main__":
     db.create_all()
     

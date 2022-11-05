@@ -3,32 +3,54 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<h2><b>Login</b></h2>
+<h1 style="color: yellow;">
+  <center><b>Login</b></center>
+</h1>
 <!-- <form action="/login" method="POST">
   <input type="username" name="username" placeholder="Username">
   <input type="password" name="password" placeholder="Password">
   <input type="submit" value="Log in">
 </form> -->
 <form action="/login" method="POST">
-  <div class="form-group">
-    <label for="formGroupExampleInput"><b>Username</b></label>
-    <input type="text" class="form-control" id="formGroupExampleInput"  name="username" placeholder="Username">
+  <div class="container mb-6" style="color: yellow;">
+    <label for="formGroupExampleInput">
+      <center><b>Username</b></center>
+    </label>
+    <input type="text" class="form-control" id="formGroupExampleInput" name="username" placeholder="Username">
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2"><b>Password</b></label>
-    <input type="password" class="form-control" id="formGroupExampleInput2"  name="password" placeholder="Password">
+  <div class="container mb-6" style="color: yellow;">
+    <label for="formGroupExampleInput2"></center><b>Password</b></center></label>
+    <input type="password" class="form-control" id="formGroupExampleInput2" name="password" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-primary"><b>Sign in</b></button>
+  <div class="row mb-6" style="margin-top: 40px">
+    <div class="col-sm-7" style="margin-left:280px">
+      <center>
+        <button type="submit" class="btn btn-success mb-6"><b>Sign in</b></button>
+      </center>
+
+
+    </div>
+  </div>
+
+
+
+
+
+
 </form>
 
+
+
+
 <style>
- 
-	
   body {
-    background-image: url("paper.gif");
-    background-color: #cccccc;
-   }
-      </style>
+    background-image: url(https://i.pinimg.com/originals/78/78/63/787863a56b90d5f42791890a53b368d7.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  }
+</style>
+
 
 {% endif %}
 {% endblock %}
